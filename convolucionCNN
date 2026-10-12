@@ -1,0 +1,51 @@
+# Ejercicio de filtro Sobel
+
+### 1. Matriz original
+
+```text
+0   0    0    0    0    0   0
+0  16   18   20   31   17   0
+0 123  210   64   73   17   0
+0 160  200  161  161   13   0
+0  30   12   16   22   21   0
+0  36   34   61  100  126   0
+0   0    0    0    0    0   0
+```
+
+### 2. Kernel Sobel
+
+```text
+-1   0   1
+-2   0   2
+-1   0   1
+```
+
+### 3. Ejemplo de cálculo
+
+Para la primera casilla se multiplica cada número por el valor de su posición en el kernel y después se suman los resultados.
+
+```text
+(0*-1) + (0*0) + (0*1)
++ (0*-2) + (16*0) + (18*2)
++ (0*-1) + (123*0) + (210*1)
+
+= 0 + 0 + 0 + 0 + 0 + 36 + 0 + 0 + 210
+
+= 246
+```
+
+### 4. Matriz resultante
+
+Aplicando el kernel a toda la matriz y limitando los resultados al rango de 0 a 255:
+
+```text
+246   0   0   0   0
+255   0   0   0   0
+255   0   0   0   0
+255   0  47   0   0
+ 80  36 142 135   0
+```
+
+### 5. Conclusión
+
+El filtro Sobel sirve para detectar bordes verticales en una imagen. Se multiplica la matriz por el kernel, se suman los resultados y se obtiene una nueva matriz.
