@@ -1,0 +1,12 @@
+
+# Entorno virtual de Python
+**/.venv/
+
+# Datos biométricos y archivos generados
+**/dataset/
+**/modelo_rostros.yml
+**/labels.json
+
+# Archivos temporales de Python
+**/__pycache__/
+*.py[cod]
