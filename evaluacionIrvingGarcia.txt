@@ -266,17 +266,29 @@ la idea de Dropout es ayudar a reducir el sobreajuste mientras el modelo aprende
   Debes adaptar `CNNriesgo' a: ranas, arañas, monos, ballenas, pájaros.
 
 
+
 9.0.1 Tareas
 ╌╌╌╌╌╌╌╌╌╌╌╌
 
   1. ¿Cuántas neuronas debe tener la *última* Dense y qué activación?
      ¿Por qué?
+
+R= Debe tener 5 neuronas y usar softmax porque existen 5 clases diferentes y cada neurona representa una clase
+
+
   2. Si todas las fotos entran a *224×224×3* pero el modelo tiene
      `input_shape=(21,28,3)', ¿qué *debe* pasar antes del `fit'? (una
      frase operativa)
+
+R= Las fotos deben redimensionarse a 21×28 y mantener los 3 canales antes de hacer el fit
+
+
   3. Propón *una* mejora de arquitectura (segundo Conv, BatchNorm, data
      augmentation…)  y di *qué síntoma* en train/val te haría pensar que
      esa mejora era necesaria.
+
+R= Usaria data argumentation para generar variaciones de las imagenes 
+y seria necesaria si la accuracy de train es alta pero la accuracy de validacion es mucho menor
 
 
 10 Pregunta 9 — CNN vs MLP vs RNN (mismo problema, mala herramienta)
@@ -287,13 +299,15 @@ la idea de Dropout es ayudar a reducir el sobreajuste mientras el modelo aprende
 
   1. Predecir si un alumno aprueba con promedio, faltas y horas de
      estudio (tabla).
+     R=  MLP porque son datos tabulares y no tienen una estructura espacial como una imagen
   2. Clasificar fotos de semáforo (rojo / amarillo / verde).
-  3. Autocompletar la siguiente línea de código dado el prefijo escrito.
+  R= CNN porque trabaja con imagenes y puede detectar caracteristicas espaciales como formas y colores
 
+  3. Autocompletar la siguiente línea de código dado el prefijo escrito.
   Si aplastas la foto del semáforo y usas un MLP “grande”, ¿puede
   *aprender*? ¿Qué sacrificas respecto a una CNN? (parámetros, datos,
   invariancia…)
-
+R= RNN/Transformer porque trabaja con secuencias y utiliza el contexto anterior para predecir lo siguiente
 
 11 Pregunta 10 — Experimento mental: mover un gato
 ══════════════════════════════════════════════════
@@ -308,13 +322,22 @@ la idea de Dropout es ayudar a reducir el sobreajuste mientras el modelo aprende
 
   1. ¿Por qué una CNN tiene *más chance* de seguir acertando que un MLP
      que ve el vector aplastado? (pesos compartidos / detección local)
+
+R= Porque la CNN usa pesos compartidos y
+ filtros que detectan caracteristicas locales en diferentes posiciones de la imagen por lo que puede reconocer al gato aunque se mueva de lugar
+
   2. Si en vez de correrlo lo *giraras 90°* y nunca viste gatos de lado
      en el train, ¿la CNN “mágica” garantiza acierto? ¿Qué haría falta
      (augmentation, más datos…)?
+
+R= No garantiza el acierto porque una rotacion de 90 grados puede cambiar la apariencia del gato ,
+por lo que seria necesario usar data augmentation con rotaciones o tener mas datos con diferentes posiciones
+
   3. Escribe *una* pregunta que tú le harías a un compañero para
      comprobar si entendió qué son los *pesos del kernel* (no copies las
      de arriba).
 
+R= ¿Que pasaria con las caracteristicas que detecta un filtro si cambiamos los pesos de su kernel?
 
 12 Autoevaluación rápida (opcional)
 ═══════════════════════════════════
