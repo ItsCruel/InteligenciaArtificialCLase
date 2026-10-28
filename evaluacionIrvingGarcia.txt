@@ -126,14 +126,23 @@ R= Porque usa los mismos filtros en la imagen y necesita menos pesos para aprend
   1. Tras el *primer* MaxPool(2×2) con padding same sobre 21×28, ¿qué
      tamaño aproximado (alto×ancho) esperas? (puedes redondear / usar la
      regla “casi la mitad”)
+
+    R= El tamaño seria 11x14, porque el MaxPool reduce la imagen casi a la mitad.
+
+
   2. ¿Qué *significan* ahora los 64 filtros de la segunda Conv2D:
      detectan bordes “crudos” o patrones *más compuestos*? Explica con
      la analogía de la lupa / capas abstractas.
+
+R= Los 64 filtros detectan patrones mas compuestos, usando las caracteristicas que aprendio la primera capa, como si usaramos una lupa para observar mas detalles
+
   3. Riesgo: si añades *muchas* capas Conv+Pool con pocas imágenes, ¿qué
      falla típico verías en las curvas train vs validation? ¿Qué harías
      primero para mitigarlo (Dropout, más datos, menos filtros…)? Elige
      *una* medida y justifica.
 
+R= El modelo podria aprender demasiado las imagenes de entrenamiento y fallar con las de validacion
+Primero reduciria la cantidad de filtros para que la red sea menos compleja
 
 5 Pregunta 4 — Formas: de volumen a vector
 ══════════════════════════════════════════
@@ -146,13 +155,23 @@ R= Porque usa los mismos filtros en la imagen y necesita menos pesos para aprend
 ╌╌╌╌╌╌╌╌╌╌╌╌
 
   1. ¿Cuántos números salen del Flatten? (un solo entero)
+
+R=  7 * 7 * 64 = 3136 numeros
+
+
   2. Si la siguiente Dense tiene *32 neuronas* (con bias), ¿cuántos
      parámetros tiene *esa* Dense?
+
+R=  Pesos: 3136 * 32 = 100352
+   Biases: 32
+   Total: 100352 + 32 = 100384 parametros
+
   3. Si en vez de Flatten usas *Global Average Pooling* (un promedio por
      canal), ¿qué forma tendrías a la salida y cuántos valores serían?
      ¿Ventaja frente a Flatten cuando la imagen de entrada es más
      grande?
 
+R= Global Average Pooling produce 64 valores, uno por cada canal , su ventaja es que reduce la cantidad de datos y parametros, comparado con Flatten
 
 6 Pregunta 5 — Softmax y el error “casi seguro”
 ═══════════════════════════════════════════════
@@ -281,7 +300,7 @@ R= Porque usa los mismos filtros en la imagen y necesita menos pesos para aprend
 12 Autoevaluación rápida (opcional)
 ═══════════════════════════════════
 
-  Marca 1–5 (1 = no entendí, 5 = lo explicaría en pizarrón):
+  Marca 1–5 (1 = no entendí, 5 = lo explicaría en pizarrón): 3.5
 
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Tema                                Nota 
