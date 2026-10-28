@@ -190,13 +190,19 @@ R= Global Average Pooling produce 64 valores, uno por cada canal , su ventaja es
 ╌╌╌╌╌╌╌╌╌╌╌╌
 
   1. ¿Qué clase predice el modelo (`argmax')?
-  2. ¿Está “seguro” o “confundido”? Usa los números, no adjetivos
-     vacíos.
+  R= Tornado porque tiene la probabilidad mas alta con 0.85
+
+¿Está “seguro” o “confundido”? Usa los números, no adjetivos
+vacíos.
+
+R= El modelo asigna 0.85 a tornado y solo 0.05 a incendio que es la clase correcta
+
+
   3. Sin calcular la fórmula exacta: argumenta si la *categorical
      crossentropy* de este ejemplo será *alta* o *baja*, y por qué
      (pista: castiga cuando la probabilidad de la clase correcta es
      pequeña).
-
+R= Sera alta porque la clase correcta es incendio y el modelo le asigna una probabilidad de solo 0.05
 
 7 Pregunta 6 — Padding, stride y “se me achicó la imagen”
 ═════════════════════════════════════════════════════════
@@ -204,23 +210,22 @@ R= Global Average Pooling produce 64 valores, uno por cada canal , su ventaja es
   Entrada *32×32*, kernel *5×5*, *un* filtro, un canal.
 
 
-7.0.1 Tareas
-╌╌╌╌╌╌╌╌╌╌╌╌
+Completa la tabla (escribe el alto×ancho de salida):
 
-  Completa la tabla (escribe el alto×ancho de salida):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+padding  stride  salida (alto×ancho)
+──────────────────────────────────────
+valid         1                      28×28
+valid         2                      14×14
+same          1                      32×32
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   padding  stride  salida (alto×ancho) 
-  ──────────────────────────────────────
-   valid         1                      
-   valid         2                      
-   same          1                      
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Luego: si encadenas tres MaxPool(2×2) seguidos sobre una imagen
+32×32 (sin cuidar bordes), ¿qué problema práctico aparece para
+clasificar objetos pequeños o detalles finos?
 
-  Luego: si encadenas *tres* MaxPool(2×2) seguidos sobre una imagen
-  32×32 (sin cuidar bordes), ¿qué problema práctico aparece para
-  clasificar objetos *pequeños* o detalles finos?
-
+R= La imagen se reduce de 32×32 a 16×16
+ despues a 8×8 y finalmente a 4×4 por lo que se pueden perder detalles pequeños y objetos de poco tamaño
 
 8 Pregunta 7 — Dropout: ¿dónde y para qué?
 ══════════════════════════════════════════
@@ -232,13 +237,27 @@ R= Global Average Pooling produce 64 valores, uno por cada canal , su ventaja es
 8.0.1 Tareas
 ╌╌╌╌╌╌╌╌╌╌╌╌
 
+8.0.1 Tareas
+╌╌╌╌╌╌╌╌╌╌╌╌
+
   1. Durante *entrenamiento*, ¿qué hace Dropout(0.5) en una capa densa
      de 32 neuronas (en promedio cuántas “sobreviven” por paso)?
+
+R= Apaga al azar aproximadamente el 50 por ciento de las neuronas en cada paso por lo que de 32 neuronas sobreviven en promedio 16
+
+
   2. Durante *inferencia* (`predict'), ¿se apagan neuronas al azar? ¿Por
      qué sí o no?
+
+R= No porque Dropout solo se aplica durante el entrenamiento y durante la inferencia se utilizan todas las neuronas
+
+
   3. Un compañero pone Dropout *solo* en la última época “para que no se
      sobreajuste al final”. ¿Tiene sentido? Critica la idea en 3–5
      líneas.
+
+R= No tiene mucho sentido porque Dropout debe utilizarse durante el entrenamiento y no solamente en la ultima epoca,  si se aplica solo al final no permite que el modelo se adapte durante todo el entrenamiento
+la idea de Dropout es ayudar a reducir el sobreajuste mientras el modelo aprende
 
 
 9 Pregunta 8 — Diseño: 5 clases de animales
